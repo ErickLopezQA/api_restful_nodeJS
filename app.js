@@ -29,13 +29,13 @@ conn.connect(function(error)  // Connect to the database and handle error
 })
 
 
-app.get('/', function (req, res)  // Create a route
+app.get('/', function (req, res)  // Create a route to the root of the server and send a respons
 {
   res.send('Funcionando!');
 });
 
 //Show all the articles 
-app.get('/api/articulos', (req, res) => // Create a route
+app.get('/api/articulos', (req, res) => // Create a route to show all the articles
 {
   conn.query ('SELECT * FROM articulos', (error, filas) =>   // Query the database and handle error
     {
@@ -51,7 +51,7 @@ app.get('/api/articulos', (req, res) => // Create a route
 });
 
 //Show an article by id
-app.get('/api/articulos/:id', (req, res) => // Create a route
+app.get('/api/articulos/:id', (req, res) => // Create a route to show an article by id
 {
   conn.query ('SELECT * FROM articulos WHERE id = ?', [req.params.id], (error, fila) =>   // Query the database and handle the error
     {
@@ -67,7 +67,7 @@ app.get('/api/articulos/:id', (req, res) => // Create a route
 });
 
 //Create articles 
-app.post('/api/articulos', (req, res) => // Create a route
+app.post('/api/articulos', (req, res) => // Create a route to create articles
 {
   let data = {descripcion:req.body.descripcion, precio:req.body.precio, stock:req.body.stock}; // Create a variable data with the values of the body
   let sql = "INSERT INTO articulos SET ?";
@@ -85,7 +85,7 @@ app.post('/api/articulos', (req, res) => // Create a route
 });
 
 //Update articles
-app.put('/api/articulos/:id', (req, res) =>
+app.put('/api/articulos/:id', (req, res) => // Create a route to update articles
 {
   let id = req.params.id;
   let descripcion = req.body.descripcion;
@@ -107,7 +107,7 @@ app.put('/api/articulos/:id', (req, res) =>
 });
 
 //Delete articles
-app.delete('/api/articulos/:id', (req, res) => 
+app.delete('/api/articulos/:id', (req, res) =>  // Create a route to delete articles
   {
     conn.query("DELETE FROM articulos WHERE id = ?", [req.params.id], function(error, filas) // Query the database and handle error
     {
@@ -124,9 +124,9 @@ app.delete('/api/articulos/:id', (req, res) =>
 
 // const puerto = process.env.PUERTO; // Get the port from the environment variable PUERTO or use 3000 as default 
 
-app.listen (3000, function () 
+app.listen (3000, function ()  // Print a message to the console
 {
-    console.log ('Servidor funcionando en puerto 3000'); // Print a message to the console
+    console.log ('Servidor funcionando en puerto 3000'); 
 });
 
 
